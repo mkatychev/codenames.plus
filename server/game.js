@@ -52,7 +52,7 @@ class Game{
     this.duet = false
     this.undercover = false
     this.nlss = false
-    hvis.danish = false
+    this.danish = false
 
     this.init();
 

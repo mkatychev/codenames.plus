@@ -34,6 +34,14 @@ readline.createInterface({
     terminal: false
 }).on('line', (line) => {undercoverwords.push(line)})
 
+// Load danish words into an array
+let danishwords = []
+filename = './server/danish-words.txt'
+readline.createInterface({
+    input: fs.createReadStream(filename),
+    terminal: false
+}).on('line', (line) => {danishwords.push(line)})
+
 // Codenames Game
 class Game{
   constructor(){
@@ -44,6 +52,7 @@ class Game{
     this.duet = false
     this.undercover = false
     this.nlss = false
+    hvis.danish = false
 
     this.init();
 
@@ -180,6 +189,7 @@ class Game{
     if (this.duet) pool = pool.concat(duetwords)
     if (this.undercover) pool = pool.concat(undercoverwords)
     if (this.nlss) pool = pool.concat(nlsswords)
+    if (this.danish) pool = pool.concat(danishwords)
     this.words = pool
   }
 

@@ -42,7 +42,7 @@ class Game {
     this.timerAmount = 61 // Default timer value
 
     this.words = packWords.base.words
-    this.packList = ["base", "duet", "undercover", "nlss", "base-den"]
+    this.packList = ["base", "duet", "undercover", "nlss", "base-den", "base-ru"]
     this.activePacks = {
       "base" : true,
       "duet" : false,

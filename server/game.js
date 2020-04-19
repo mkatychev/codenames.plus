@@ -20,7 +20,11 @@ let packWords = {
     words: []
   },
   "base-dk": {
-    filename: "./server/den-words.txt",
+    filename: "./server/dk-words.txt",
+    words: []
+  },
+  "base-ru": {
+    filename: "./server/ru-words.txt",
     words: []
   }
 }

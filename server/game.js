@@ -19,7 +19,7 @@ let packWords = {
     filename: "./server/nlss-words.txt",
     words: []
   },
-  "base-den": {
+  "base-dk": {
     filename: "./server/den-words.txt",
     words: []
   }
@@ -42,13 +42,13 @@ class Game {
     this.timerAmount = 61 // Default timer value
 
     this.words = packWords.base.words
-    this.packList = ["base", "duet", "undercover", "nlss", "base-den", "base-ru"]
+    this.packList = ["base", "duet", "undercover", "nlss", "base-dk", "base-ru"]
     this.activePacks = {
       "base" : true,
       "duet" : false,
       "undercover" : false,
       "nlss" : false,
-      "base-den" : false,
+      "base-dk" : false,
     }
     this.activePacks
 

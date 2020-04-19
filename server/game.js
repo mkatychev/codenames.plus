@@ -81,34 +81,33 @@ class Game {
   }
 
   // Check the number of unflipped team tiles and determine if someone won
-  checkWin() {
-    this.red = this.findType("red") // unflipped red tiles
-    this.blue = this.findType("blue") // unflipped blue tiles
+  checkWin(){
+    this.red = this.findType('red')   // unflipped red tiles
+    this.blue = this.findType('blue') // unflipped blue tiles
     // Check team winner
     if (this.red === 0) {
       this.over = true
-      this.winner = "red"
+      this.winner = 'red'
     }
     if (this.blue === 0) {
       this.over = true
-      this.winner = "blue"
+      this.winner = 'blue'
     }
   }
 
   // When called, will change a tiles state to flipped
-  flipTile(i, j) {
-    if (!this.board[i][j].flipped) {
-      let type = this.board[i][j].type // Find the type of tile (red/blue/neutral/death)
-      this.board[i][j].flipped = true // Flip tile
-      if (type === "death") {
-        // If death was flipped, end the game and find winner
+  flipTile(i,j){
+    if (!this.board[i][j].flipped){
+      let type = this.board[i][j].type               // Find the type of tile (red/blue/neutral/death)
+      this.board[i][j].flipped = true                // Flip tile
+      if (type === 'death') {                        // If death was flipped, end the game and find winner
         this.over = true
-        if (this.turn === "blue") this.winner = "red"
-        else this.winner = "blue"
-      } else if (type === "neutral") this.switchTurn()
-      // Switch turn if neutral was flipped
+        if(this.turn === 'blue') this.winner = 'red'
+        else this.winner = 'blue'
+      }
+      else if (type === 'neutral') this.switchTurn() // Switch turn if neutral was flipped
       else if (type !== this.turn) this.switchTurn() // Switch turn if opposite teams tile was flipped
-      this.checkWin() // See if the game is over
+      this.checkWin()                                // See if the game is over
     }
   }
 
@@ -124,36 +123,34 @@ class Game {
   }
 
   // Reset the timer and swap the turn over to the other team
-  switchTurn() {
-    this.timer = this.timerAmount // Reset timer
-    if (this.turn === "blue") this.turn = "red"
-    // Swith turn
-    else this.turn = "blue"
+  switchTurn(){
+    this.timer = this.timerAmount               // Reset timer
+    if (this.turn === 'blue') this.turn = 'red' // Switch turn
+    else this.turn = 'blue'
   }
 
+
   // 50% red turn, 50% blue turn
-  randomTurn() {
-    this.turn = "blue"
-    if (Math.random() < 0.5) this.turn = "red"
+  randomTurn(){
+    this.turn = 'blue'
+    if (Math.random() < 0.5) this.turn = 'red'
   }
 
   // Randomly assigns a death tile and red / blue tiles
-  initBoard() {
-    let changed = [] // Keep track of tiles that have been givin a type
-    let tile = this.randomTile() // Temp tile object that has a random num (0-24) and a coordinate on the grid
-    this.board[tile.i][tile.j].type = "death" // Make the first selected tile a death
-    changed.push(tile.num) // Add the tiles random num (0-24) to the changed []
+  initBoard(){
+    let changed = []                                              // Keep track of tiles that have been givin a type
+    let tile = this.randomTile()                                  // Temp tile object that has a random num (0-24) and a coordinate on the grid
+    this.board[tile.i][tile.j].type = 'death'                     // Make the first selected tile a death
+    changed.push(tile.num)                                        // Add the tiles random num (0-24) to the changed []
 
-    let color = this.turn // First teams color
-    for (let i = 0; i < 17; i++) {
-      // Set tiles' color 17 times(9 for team1, 8 for team2)
-      tile = this.randomTile() // Selected a new random tile
+    let color = this.turn;                                        // First teams color
+    for (let i = 0; i < 17; i++){                                 // Set tiles' color 17 times(9 for team1, 8 for team2)
+      tile = this.randomTile()                                    // Selected a new random tile
       while (changed.includes(tile.num)) tile = this.randomTile() // If the tile has already been changed, find a new random tile
-      this.board[tile.i][tile.j].type = color // Set the tiles color
-      changed.push(tile.num) // Add the tiles random num (0-24) to the changed []
-      // Swap the temp color for the next added tile
-      if (color === "blue") color = "red"
-      else color = "blue"
+      this.board[tile.i][tile.j].type = color                     // Set the tiles color
+      changed.push(tile.num)                                      // Add the tiles random num (0-24) to the changed []
+      if (color === 'blue') color = 'red'                         // Swap the temp color for the next added tile
+      else color = 'blue'
     }
   }
 
@@ -167,15 +164,12 @@ class Game {
     return { num, i, j }
   }
 
-  // Create a new 5x5 board of random words
-  newBoard() {
-    this.randomTurn() // Pick a new random turn
-    this.board = new Array() // Init the board to be a 2d array
-    for (let i = 0; i < 5; i++) {
-      this.board[i] = new Array()
-    }
-    let usedWords = [] // Keep track of used words
-    let foundWord // Temp var for a word out of the list
+  newBoard(){                                                 // Create a new 5x5 board of random words
+    this.randomTurn()                                         // Pick a new random turn
+    this.board = new Array();                                 // Init the board to be a 2d array
+    for (let i = 0; i < 5; i++) {this.board[i] = new Array()}
+    let usedWords = []                                        // Keep track of used words
+    let foundWord                                             // Temp var for a word out of the list
 
     for (let i = 0; i < 5; i++) {
       for (let j = 0; j < 5; j++) {
@@ -185,11 +179,10 @@ class Game {
           foundWord = this.words[Math.floor(Math.random() * this.words.length)]
         }
         usedWords.push(foundWord) // Add the word to the used list
-        this.board[i][j] = {
-          // Add the tile object to the board
-          word: foundWord,
-          flipped: false,
-          type: "neutral"
+        this.board[i][j] = {      // Add the tile object to the board
+          word:foundWord,
+          flipped:false,
+          type:'neutral'
         }
       }
     }
@@ -208,22 +201,16 @@ class Game {
   }
 
   // Debugging purposes
-  printBoard() {
-    for (let i = 0; i < 5; i++) {
-      console.log(
-        this.board[i][0].type +
-          " | " +
-          this.board[i][1].type +
-          " | " +
-          this.board[i][2].type +
-          " | " +
-          this.board[i][3].type +
-          " | " +
-          this.board[i][4].type
-      )
+  printBoard(){
+    for (let i = 0; i < 5; i++){
+      console.log(this.board[i][0].type + " | " +
+                  this.board[i][1].type + " | " +
+                  this.board[i][2].type + " | " +
+                  this.board[i][3].type + " | " +
+                  this.board[i][4].type)
     }
   }
 }
 
 // Let the main nodejs server know this file exists
-module.exports = Game
+module.exports = Game;

@@ -40,7 +40,7 @@ let buttonModeTimed = document.getElementById("mode-timed")
 let buttonAbout = document.getElementById("about-button")
 let buttonAfk = document.getElementById("not-afk")
 let buttonServerMessageOkay = document.getElementById("server-message-okay")
-let packList = ["base", "duet", "undercover", "nlss", "base-dk", "base-ru"]
+let packList = ["base", "duet", "undercover", "nlss", "base-dk", "base-es", "base-fr", "base-ru"]
 // iterate through packList assigning elements and click events
 let buttonCards = {}
 packList.forEach(packName => {

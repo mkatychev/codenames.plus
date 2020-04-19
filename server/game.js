@@ -23,10 +23,18 @@ let packWords = {
     filename: "./server/dk-words.txt",
     words: []
   },
+  "base-es": {
+    filename: "./server/es-words.txt",
+    words: []
+  },
+  "base-fr": {
+    filename: "./server/fr-words.txt",
+    words: []
+  },
   "base-ru": {
     filename: "./server/ru-words.txt",
     words: []
-  }
+  },
 }
 
 Object.entries(packWords).forEach(([key, val]) => {
@@ -46,15 +54,11 @@ class Game {
     this.timerAmount = 61 // Default timer value
 
     this.words = packWords.base.words
-    this.packList = ["base", "duet", "undercover", "nlss", "base-dk", "base-ru"]
-    this.activePacks = {
-      "base" : true,
-      "duet" : false,
-      "undercover" : false,
-      "nlss" : false,
-      "base-dk" : false,
-    }
-    this.activePacks
+    this.packList = ["base", "duet", "undercover", "nlss", "base-dk", "base-es", "base-fr", "base-ru"]
+    this.activePacks = {}
+    this.packList.forEach(packName => this.activePacks[packName] = false)
+
+    this.activePacks.base = true
 
     this.init()
 
